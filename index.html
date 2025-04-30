@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nguyễn Văn Hiếu - CV</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    .cv-container {
+      display: flex;
+      max-width: 1000px;
+      margin: 2rem auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      background-color: #1e293b;
+      color: #fff;
+      width: 280px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .sidebar .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 2px solid #fff;
+    }
+
+    .role {
+      font-size: 1rem;
+      margin: 0.5rem 0 1.5rem;
+      color: #60a5fa;
+    }
+
+    .sidebar a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+
+    .sidebar ul {
+      padding-left: 1rem;
+      list-style-type: square;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar h3 {
+      margin-top: 1.5rem;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 0.25rem;
+    }
+
+    .content {
+      padding: 2rem;
+      flex: 1;
+    }
+
+    .content h2 {
+      color: #1e40af;
+      border-bottom: 2px solid #1e40af;
+      padding-bottom: 0.25rem;
+      margin-top: 0;
+    }
+
+    .content h3 {
+      margin-bottom: 0.25rem;
+    }
+
+    .content ul {
+      padding-left: 1.25rem;
+      list-style: disc;
+    }
+
+    .highlight-section {
+      background-color: #f1f5f9;
+      border-left: 4px solid #1e40af;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+    }
+
+    .highlight-section ul li a {
+      font-weight: bold;
+      color: #1e40af;
+    }
+
+    .highlight-section ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .thankyou {
+      margin-top: 2rem;
+      font-style: italic;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="cv-container">
+    <aside class="sidebar">
+      <img src="Avatar.png" alt="Ảnh đại diện" class="avatar" onerror="this.src='https://via.placeholder.com/100'">
+      <h2>Nguyễn Văn Hiếu</h2>
+      <p class="role"><strong>Lập trình viên Web (Backend)</strong></p>
+
+      <div class="contact">
+        <p>📧 n.van.hieu1819@gmail.com</p>
+        <p>🌐 <a href="https://github.com/hieuchaydi" target="_blank">GitHub</a></p>
+        <p>🏫 ICTU - Đại học Thái Nguyên</p>
+        <p>💡 <a href="https://leetcode.com/u/hieuand2004" target="_blank">LeetCode</a></p>
+        <p>🔗 <a href="https://linkedin.com/in/hiếu-nguyễn-6a4932317" target="_blank">LinkedIn</a></p>
+      </div>
+
+      <div class="skills">
+        <h3>🛠️ Kỹ năng</h3>
+        <ul>
+          <li>Python</li>
+          <li>JavaScript</li>
+          <li>HTML/CSS</li>
+          <li>Machine Learning</li>
+          <li>Flask, Git, RESTful API</li>
+        </ul>
+      </div>
+
+      <div class="languages">
+        <h3>🌐 Ngoại Ngữ</h3>
+        <ul>
+          <li>Tiếng Anh - B2</li>
+          <li>Tiếng Trung - HSK3</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="education">
+        <h2>🎓 Học vấn</h2>
+        <h3>ICTU - Đại học Thái Nguyên</h3>
+        <p><strong>Chuyên ngành:</strong> Công nghệ thông tin</p>
+        <p><strong>Dự kiến tốt nghiệp:</strong> 2026</p>
+      </section>
+
+      <section class="profile">
+        <h2>🧑‍💻 Giới thiệu</h2>
+        <p>Xin chào, tôi là <strong>Nguyễn Văn Hiếu</strong>, sinh viên năm 3 ngành Công nghệ Thông tin tại Đại học CNTT & Truyền thông (ICTU) - Đại học Thái Nguyên. Tôi có niềm đam mê lớn với lập trình web, đặc biệt là mảng backend.</p>
+        <p>Tôi đang tìm kiếm cơ hội thực tập vị trí <strong>Web Backend Intern</strong> để học hỏi, nâng cao kỹ năng và áp dụng kiến thức đã tích lũy qua các dự án cá nhân vào môi trường thực tế.</p>
+      </section>
+
+      <section class="experience">
+        <h2>📌 Kinh nghiệm</h2>
+        <p>Hiện tại tôi chưa có kinh nghiệm làm việc chính thức, nhưng đã thực hiện nhiều <strong>dự án cá nhân</strong> như:</p>
+        <ul>
+          <li>Xây dựng website đọc truyện bằng Flask, HTML/CSS</li>
+          <li>Ứng dụng game với Python và Pygame</li>
+          <li>Chatbot với Microsoft DialoGPT</li>
+          <li>Quản lý dự án với GitHub, kỹ năng teamwork cơ bản</li>
+        </ul>
+      </section>
+
+      <section class="highlight-section">
+        <h2>🚀 Dự án tiêu biểu</h2>
+        <ul>
+          <li><a href="https://github.com/hieuchaydi/flappy-bird-dqn" target="_blank">Flappy Bird AI</a> – Dùng Deep Q-Learning</li>
+          <li><a href="https://github.com/hieuchaydi/truyenchu" target="_blank">truyenchu</a> – Website đọc truyện chữ</li>
+          <li><a href="https://github.com/hieuchaydi/soketwithpython" target="_blank">Phòng chat</a> – Với SocketIO</li>
+          <li><a href="https://github.com/hieuchaydi/TruyenWeb" target="_blank">Web truyện tranh</a> – HTML/CSS/Flask</li>
+          <li><a href="https://github.com/hieuchaydi/pygamedesk" target="_blank">pygamedesk</a> – Game mini với Pygame</li>
+        </ul>
+      </section>
+
+      <p class="thankyou">🎉 Cảm ơn bạn đã dành thời gian xem CV của tôi!</p>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('CV của Nguyễn Văn Hiếu đã được tải thành công!');
+    });
+  </script>
+</body>
+</html>
