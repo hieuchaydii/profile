@@ -1,785 +1,121 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DearLove - Hạnh phúc bắt nguồn từ những thứ nhỏ nhặt nhất</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: white;
-            font-family: 'Orbitron', sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            touch-action: manipulation;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px;
-            position: relative;
-            z-index: 10;
-        }
-        
-        header {
-            text-align: center;
-            padding: 15px 0;
-            margin-bottom: 20px;
-        }
-        
-        .logo {
-            font-size: clamp(1.8rem, 5vw, 2.2rem);
-            margin-bottom: 8px;
-            color: #ff6b9d;
-            text-shadow: 0 0 8px rgba(255, 107, 157, 0.7);
-        }
-        
-        .tagline {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
-            margin-bottom: 15px;
-            color: #ffd6e7;
-        }
-        
-        #thankyou-content {
-            display: block;
-            text-align: center;
-        }
-        
-        #galaxy-content {
-            display: none;
-        }
-        
-        .message-section {
-            max-width: 90%;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid rgba(255, 107, 157, 0.3);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .message-title {
-            font-size: clamp(1.4rem, 4.5vw, 1.6rem);
-            color: #ff6b9d;
-            margin-bottom: 15px;
-            text-align: center;
-            text-shadow: 0 0 8px rgba(255, 107, 157, 0.5);
-        }
-        
-        .message-content {
-            font-size: clamp(0.9rem, 3.5vw, 1rem);
-            line-height: 1.6;
-            color: #e0e0ff;
-        }
-        
-        .message-content p {
-            margin-bottom: 12px;
-        }
-        
-        #enter-galaxy {
-            background: #ff6b9d;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: clamp(0.9rem, 3.5vw, 1rem);
-            margin-top: 15px;
-            transition: background 0.3s ease;
-        }
-        
-        #enter-galaxy:hover {
-            background: #ff4c8d;
-        }
-        
-        .main-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .message-highlight {
-            color: #ff6b9d;
-            font-weight: bold;
-        }
-        
-        .date-highlight {
-            text-align: center;
-            font-size: clamp(1.1rem, 4vw, 1.3rem);
-            color: #ffd6e7;
-            margin-top: 15px;
-            font-family: 'Dancing Script', cursive;
-        }
-        
-        .galaxy-container {
-            flex: 1;
-            min-width: 280px;
-            height: clamp(250px, 50vw, 400px);
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid rgba(255, 107, 157, 0.3);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .galaxy-view {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        
-        .galaxy-3d {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            perspective: 800px;
-        }
-        
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-            animation: twinkle 3s infinite alternate;
-            transform: translateZ(var(--z)) scale(var(--scale));
-            opacity: var(--opacity);
-        }
-        
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-        
-        .text-particle {
-            position: absolute;
-            color: #ff6b9d;
-            text-shadow: 0 0 12px #ff6b9d;
-            font-weight: bold;
-            transform: translateZ(var(--z)) scale(var(--scale));
-            opacity: var(--opacity);
-            white-space: nowrap;
-            animation: fall linear forwards;
-        }
-        
-        @keyframes fall {
-            0% {
-                transform: translateZ(var(--z)) scale(var(--scale)) translateY(-100px);
-                opacity: var(--opacity);
-            }
-            100% {
-                transform: translateZ(var(--z)) scale(var(--scale)) translateY(600px);
-                opacity: 0;
-            }
-        }
-        
-        .heart-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 100;
-            display: none;
-        }
-        
-        .heart-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: clamp(1.5rem, 5vw, 1.8rem);
-            color: #ff6b9d;
-            text-shadow: 0 0 8px rgba(255, 107, 157, 0.7);
-            font-weight: bold;
-        }
-        
-        .help-button {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            width: clamp(40px, 10vw, 45px);
-            height: clamp(40px, 10vw, 45px);
-            background: rgba(255, 107, 157, 0.8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(18px, 5vw, 22px);
-            color: white;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .help-button:hover {
-            background: rgba(255, 107, 157, 1);
-            transform: scale(1.1);
-        }
-        
-        .help-dialog {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.85);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            z-index: 1002;
-            max-width: 90%;
-            width: clamp(280px, 80vw, 360px);
-            font-family: 'Orbitron', sans-serif;
-            box-shadow: 0 0 25px rgba(255, 107, 157, 0.5);
-            border: 1px solid rgba(255, 107, 157, 0.3);
-            backdrop-filter: blur(8px);
-        }
-        
-        .help-dialog.active {
-            display: block;
-            animation: dialogFadeIn 0.4s ease;
-        }
-        
-        @keyframes dialogFadeIn {
-            from { opacity: 0; transform: translate(-50%, -40%); }
-            to { opacity: 1; transform: translate(-50%, -50%); }
-        }
-        
-        .help-dialog h2 {
-            font-size: clamp(1.2rem, 4vw, 1.4rem);
-            margin-bottom: 0.8rem;
-            color: #ff6b9d;
-            text-align: center;
-        }
-        
-        .help-dialog p {
-            font-size: clamp(0.9rem, 3.5vw, 1rem);
-            line-height: 1.5;
-            margin-bottom: 0.8rem;
-        }
-        
-        .help-dialog ul {
-            padding-left: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .help-dialog li {
-            margin-bottom: 8px;
-            font-size: clamp(0.85rem, 3.5vw, 0.95rem);
-            line-height: 1.4;
-        }
-        
-        .help-dialog .start-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: transparent;
-            border: none;
-            color: #dc45bb;
-            font-size: clamp(16px, 4vw, 18px);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .help-dialog .start-button:hover {
-            transform: scale(1.2);
-        }
-        
-        footer {
-            text-align: center;
-            padding: 15px;
-            font-size: clamp(0.8rem, 3vw, 0.9rem);
-            color: rgba(255, 255, 255, 0.7);
-            position: relative;
-            z-index: 10;
-        }
-        
-        footer a {
-            color: #ff6b9d;
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 768px) {
-            .main-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .message-section, .galaxy-container {
-                min-width: 100%;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-            header {
-                padding: 10px 0;
-                margin-bottom: 15px;
-            }
-        }
-        
-        .audio-controls {
-            position: fixed;
-            bottom: 70px;
-            right: 15px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .audio-btn {
-            width: clamp(35px, 9vw, 40px);
-            height: clamp(35px, 9vw, 40px);
-            background: rgba(255, 107, 157, 0.8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            font-size: clamp(16px, 4vw, 18px);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .audio-btn:hover {
-            background: rgba(255, 107, 157, 1);
-            transform: scale(1.1);
-        }
-        
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            animation: particle-float linear infinite;
-        }
-        
-        @keyframes particle-float {
-            to { transform: translateY(-100vh); }
-        }
-        
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You 💞</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #ffdde1, #ee9ca7);
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .message {
+      position: absolute;
+      padding: 14px 22px;
+      border-radius: 16px;
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      transform: scale(0.8);
+      animation: pop 1s ease forwards, float 4s ease-in-out infinite;
+    }
+
+    @keyframes pop {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(3deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    /* Trái tim bay */
+    .heart {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.7);
+      animation: fall 6s linear infinite;
+      user-select: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    
-    <div class="container">
-        <header>
-            <div class="logo">DearLove</div>
-            <div class="tagline">Hạnh phúc bắt nguồn từ những thứ nhỏ nhặt nhất</div>
-        </header>
-        
-        <div id="thankyou-content">
-            <div class="message-section">
-                <h2 class="message-title">Cảm ơn bạn!</h2>
-                <div class="message-content">
-                    <p>Bạn đã nhận được một tin nhắn đặc biệt. Hãy nhấn vào nút bên dưới để khám phá dải ngân hà dành riêng cho bạn!</p>
-                </div>
-                <button id="enter-galaxy">Khám phá ngân hà</button>
-            </div>
-        </div>
-        
-        <div id="galaxy-content">
-            <div class="main-content">
-                <div class="message-section">
-                    <h2 class="message-title">💌 Thư gửi em</h2>
-                    <div class="message-content">
-                        <p>Em ơi, hôm nay mình gần đến kỷ niệm 2 năm bên nhau rồi, thời gian trôi nhanh thật. 😊</p>
-                        <p>Anh vẫn nhớ những ngày đầu, từ lần đầu gặp em, đến những buổi đi chơi giản dị, hay cả những lúc cãi nhau rồi lại làm lành. Mỗi khoảnh khắc đều làm anh thấy biết ơn vì có em ở.</p>
-                        <p class="message-highlight">Em là người khiến anh muốn cố gắng mỗi ngày, để cùng nhau xây đắp những điều tốt đẹp hơn.</p>
-                        <p>Dải ngân hà bên cạnh là món quà nhỏ anh dành cho em, với mỗi ngôi sao mang một lời chúc rằng chúng ta sẽ luôn đồng hành, bất kể thế nào. 🌌</p>
-                        <p>Cảm ơn em vì đã ở đây, cùng anh đi qua gần 2 năm này. Mình cùng đón thêm nhiều năm nữa nhé! ❤️</p>
-                    </div>
-                    <div class="date-highlight">25/06/2025</div>
-                </div>
-                
-                <div class="galaxy-container">
-                    <div class="galaxy-view" id="galaxy">
-                        <div class="galaxy-3d" id="galaxy3D"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <footer>
-                <p>DearLove - Dự án được tạo bởi <a href="https://www.tiktok.com/@Hieu.0.0" target="_blank">HIEU</a></p>
-                <p style="margin-bottom: 1rem;">Hạnh phúc không phải là điểm đến, mà là hành trình chúng ta cùng nhau trải qua</p>
-            </footer>
-        </div>
-    </div>
-    
-    <div class="heart-container" id="heartContainer">
-        <canvas id="pinkboard"></canvas>
-        <div class="heart-text">Hiếu</div>
-    </div>
-    
-    <div class="audio-controls">
-        <div class="audio-btn" id="playBtn">▶</div>
-        <div class="audio-btn" id="muteBtn">🔊</div>
-    </div>
-    
-    <div class="help-button" id="helpButton">?</div>
-    
-    <div class="help-dialog" id="helpDialog">
-        <button class="start-button" id="closeButton">✖</button>
-        <h2>Hướng Dẫn Sử Dụng</h2>
-        <p>Chào bạn! Đây là cách tương tác với trang web:</p>
-        <ul>
-            <li>✨ <strong>Kéo/nghiêng</strong> để xoay dải ngân hà</li>
-            <li>✨ <strong>Chạm hai ngón</strong> để phóng to/thu nhỏ</li>
-            <li>✨ <strong>Nhấn đúp</strong> để mở hiệu ứng trái tim</li>
-            <li>✨ <strong>Nhấn giữ màn hình</strong> để chữ chuyển động chậm lại</li>
-            <li>✨ <strong>Nhấn nút Play</strong> để bật/tắt nhạc nền</li>
-        </ul>
-        <p>Hãy khám phá và tận hưởng trải nghiệm ngân hà lãng mạn này!</p>
-    </div>
-    
-    <audio id="galaxyAudio" loop preload="auto">
-        <source src="https://cdn.deargift.online/songs/eyenoselip.mp3" type="audio/mpeg">
-    </audio>
-    
-    <script>
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        const particleCount = isMobile ? 50 : 100;
-        const starCount = isMobile ? 100 : 200;
-        const heartParticleCount = isMobile ? 75 : 150;
+  <script>
+    const messages = [
+      "你要想我 💭",
+      "我爱你 ❤️",
+      "我好想你 🥺",
+      "你想吃糖炒栗子吗? 🌰",
+      "你想他了吗 💕"
+    ];
 
-        function initParticles() {
-            const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.width = `${Math.random() * 3 + 1}px`;
-                particle.style.height = particle.style.width;
-                particle.style.opacity = Math.random() * 0.5 + 0.3;
-                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        function initGalaxy() {
-            const galaxy = document.getElementById('galaxy');
-            const galaxy3D = document.getElementById('galaxy3D');
-            const textParticles = [
-                "I love you", "26/06/2023", "💖", "You're amazing", "Thank you", "My everything",
-                "Happiness", "Forever", "Together", "Soulmate", "Adore you", "My universe",
-                "Eternity", "Darling", "Sweetheart", "My joy", "Always", "My heart",
-                "Dream come true", "You are enough", "Cherish you", "My light", "True love",
-                "Endless", "My star", "Beloved", "You shine", "Pure bliss", "My forever",
-                "Treasure you", "Heartbeats", "Infinite", "My world", "Passion", "You are mine",
-                "Eternal flame", "My angel", "Radiance", "Love always", "My sunshine", "Destiny",
-                "Heartbeat", "My home", "Sweet love", "Evermore", "My muse", "Joyful", "Timeless",
-                "My darling", "Forever yours"
-            ];
-            
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                const posX = (Math.random() - 0.5) * (isMobile ? 1000 : 2000);
-                const posY = (Math.random() - 0.5) * (isMobile ? 1000 : 2000);
-                const posZ = (Math.random() - 0.5) * (isMobile ? 500 : 1000);
-                const size = Math.random() * 2 + 1;
-                const opacity = 1 - Math.abs(posZ) / (isMobile ? 500 : 1000);
-                const scale = 1 - Math.abs(posZ) / (isMobile ? 500 : 1000);
-                star.style.setProperty('--z', `${posZ}px`);
-                star.style.setProperty('--scale', scale);
-                star.style.setProperty('--opacity', opacity);
-                star.style.left = `calc(50% + ${posX}px)`;
-                star.style.top = `calc(50% + ${posY}px)`;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.animationDelay = `${Math.random() * 3}s`;
-                galaxy3D.appendChild(star);
-            }
-            
-            function createParticle() {
-                const particle = document.createElement('div');
-                particle.classList.add('text-particle');
-                const text = textParticles[Math.floor(Math.random() * textParticles.length)];
-                particle.textContent = text;
-                const posX = (Math.random() - 0.5) * (isMobile ? 500 : 1000);
-                const posZ = (Math.random() - 0.5) * (isMobile ? 500 : 1000);
-                const size = Math.random() * 8 + (isMobile ? 14 : 16);
-                const opacity = 1 - Math.abs(posZ) / (isMobile ? 500 : 1000);
-                const scale = 1 - Math.abs(posZ) / (isMobile ? 500 : 1000);
-                const duration = Math.random() * 1.5 + (isMobile ? 2 : 1.5);
-                particle.style.setProperty('--z', `${posZ}px`);
-                particle.style.setProperty('--scale', scale);
-                particle.style.setProperty('--opacity', opacity);
-                particle.style.left = `calc(50% + ${posX}px)`;
-                particle.style.top = `-50px`;
-                particle.style.fontSize = `${size}px`;
-                particle.style.animationDuration = `${duration}s`;
-                galaxy3D.appendChild(particle);
-                setTimeout(() => particle.remove(), duration * 1000);
-            }
-            
-            function spawnParticles() {
-                const count = Math.floor(Math.random() * 2 + (isMobile ? 1 : 2));
-                for (let i = 0; i < count; i++) {
-                    createParticle();
-                }
-                setTimeout(spawnParticles, Math.random() * 100 + 50);
-            }
-            
-            document.getElementById('enter-galaxy').addEventListener('click', () => {
-                setTimeout(spawnParticles, 500);
-            }, { passive: true });
-            
-            let rotateX = 0, rotateY = 0, isDragging = false, startX, startY, currentScale = 1, initialDistance = 0;
-            
-            function updateRotation() {
-                galaxy3D.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${currentScale})`;
-            }
-            
-            galaxy.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                startX = e.clientX;
-                startY = e.clientY;
-            });
-            
-            galaxy.addEventListener('mousemove', (e) => {
-                if (isDragging) {
-                    const deltaX = e.clientX - startX;
-                    const deltaY = e.clientY - startY;
-                    rotateY += deltaX * 0.2;
-                    rotateX -= deltaY * 0.2;
-                    rotateX = Math.max(-90, Math.min(90, rotateX));
-                    startX = e.clientX;
-                    startY = e.clientY;
-                    updateRotation();
-                }
-            });
-            
-            galaxy.addEventListener('mouseup', () => isDragging = false);
-            
-            galaxy.addEventListener('touchstart', (e) => {
-                if (e.touches.length === 1) {
-                    isDragging = true;
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                }
-            }, { passive: true });
-            
-            galaxy.addEventListener('touchmove', (e) => {
-                if (e.touches.length === 1 && isDragging) {
-                    const deltaX = e.touches[0].clientX - startX;
-                    const deltaY = e.touches[0].clientY - startY;
-                    rotateY += deltaX * 0.2;
-                    rotateX -= deltaY * 0.2;
-                    rotateX = Math.max(-90, Math.min(90, rotateX));
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                    updateRotation();
-                } else if (e.touches.length === 2) {
-                    e.preventDefault();
-                    const touch1 = e.touches[0], touch2 = e.touches[1];
-                    const distance = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
-                    if (initialDistance === 0) {
-                        initialDistance = distance;
-                    } else {
-                        const scaleChange = distance / initialDistance;
-                        currentScale = Math.max(0.5, Math.min(2, currentScale * scaleChange));
-                        updateRotation();
-                        initialDistance = distance;
-                    }
-                }
-            }, { passive: false });
-            
-            galaxy.addEventListener('touchend', () => {
-                isDragging = false;
-                initialDistance = 0;
-            }, { passive: true });
-            
-            let isLongPressing = false;
-            galaxy.addEventListener('mousedown', () => {
-                isLongPressing = true;
-                setTimeout(() => {
-                    if (isLongPressing) {
-                        document.querySelectorAll('.text-particle').forEach(p => {
-                            p.style.animationPlayState = 'paused';
-                        });
-                    }
-                }, 500);
-            });
-            
-            galaxy.addEventListener('mouseup', () => {
-                isLongPressing = false;
-                document.querySelectorAll('.text-particle').forEach(p => {
-                    p.style.animationPlayState = 'running';
-                });
-            });
-            
-            galaxy.addEventListener('touchstart', () => {
-                isLongPressing = true;
-                setTimeout(() => {
-                    if (isLongPressing) {
-                        document.querySelectorAll('.text-particle').forEach(p => {
-                            p.style.animationPlayState = 'paused';
-                        });
-                    }
-                }, 500);
-            }, { passive: true });
-            
-            galaxy.addEventListener('touchend', () => {
-                isLongPressing = false;
-                document.querySelectorAll('.text-particle').forEach(p => {
-                    p.style.animationPlayState = 'running';
-                });
-            }, { passive: true });
-        }
-        
-        function initHeartAnimation() {
-            const canvas = document.getElementById('pinkboard');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            const particles = [];
-            for (let i = 0; i < heartParticleCount; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 1.5 + 1,
-                    vx: Math.random() * 1 - 0.5,
-                    vy: Math.random() * 1 - 0.5,
-                    color: `hsl(${Math.random() * 360}, 100%, 70%)`
-                });
-            }
-            
-            function drawHeart(x, y, size, color) {
-                ctx.beginPath();
-                ctx.fillStyle = color;
-                const topCurveHeight = size * 0.3;
-                ctx.moveTo(x, y + size/3);
-                ctx.bezierCurveTo(x, y - topCurveHeight, x - size, y - topCurveHeight, x - size, y + size/3);
-                ctx.bezierCurveTo(x - size, y + topCurveHeight * 2, x, y + size * 0.8, x, y + size);
-                ctx.bezierCurveTo(x, y + size * 0.8, x + size, y + topCurveHeight * 2, x + size, y + size/3);
-                ctx.bezierCurveTo(x + size, y - topCurveHeight, x, y - topCurveHeight, x, y + size/3);
-                ctx.fill();
-                ctx.closePath();
-            }
-            
-            function animate() {
-                if (document.getElementById('heartContainer').style.display === 'block') {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    drawHeart(canvas.width / 2, canvas.height / 2, isMobile ? 80 : 100, 'rgba(255, 107, 157, 0.5)');
-                    particles.forEach(p => {
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                        ctx.fillStyle = p.color;
-                        ctx.fill();
-                        p.x += p.vx;
-                        p.y += p.vy;
-                        if (p.x <= 0 || p.x >= canvas.width) p.vx *= -1;
-                        if (p.y <= 0 || p.y >= canvas.height) p.vy *= -1;
-                    });
-                }
-                requestAnimationFrame(animate);
-            }
-            
-            animate();
-        }
-        
-        function setupHelpDialog() {
-            const helpButton = document.getElementById('helpButton');
-            const closeButton = document.getElementById('closeButton');
-            const helpDialog = document.getElementById('helpDialog');
-            helpButton.addEventListener('click', () => helpDialog.classList.add('active'), { passive: true });
-            closeButton.addEventListener('click', () => helpDialog.classList.remove('active'), { passive: true });
-        }
-        
-        function setupAudioControls() {
-            const audio = document.getElementById('galaxyAudio');
-            const playBtn = document.getElementById('playBtn');
-            const muteBtn = document.getElementById('muteBtn');
-            playBtn.addEventListener('click', () => {
-                if (audio.paused) {
-                    audio.play().catch(() => {});
-                    playBtn.textContent = '⏸';
-                } else {
-                    audio.pause();
-                    playBtn.textContent = '▶';
-                }
-            }, { passive: true });
-            muteBtn.addEventListener('click', () => {
-                audio.muted = !audio.muted;
-                muteBtn.textContent = audio.muted ? '🔇' : '🔊';
-            }, { passive: true });
-        }
-        
-        function setupHeartToggle() {
-            document.querySelector('.galaxy-container').addEventListener('dblclick', () => {
-                const heartContainer = document.getElementById('heartContainer');
-                heartContainer.style.display = 'block';
-                setTimeout(() => heartContainer.style.display = 'none', 4000);
-            }, { passive: true });
-        }
-        
-        function setupGalaxyTransition() {
-            const enterButton = document.getElementById('enter-galaxy');
-            const thankyouContent = document.getElementById('thankyou-content');
-            const galaxyContent = document.getElementById('galaxy-content');
-            enterButton.addEventListener('click', () => {
-                thankyouContent.style.display = 'none';
-                galaxyContent.style.display = 'block';
-            }, { passive: true });
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            initParticles();
-            initGalaxy();
-            initHeartAnimation();
-            setupHelpDialog();
-            setupAudioControls();
-            setupHeartToggle();
-            setupGalaxyTransition();
-        }, { passive: true });
-    </script>
+    const colors = [
+      "#ff99ac",
+      "#ffb6c1",
+      "#ffc3a0",
+      "#ff8c69",
+      "#d8bfd8"
+    ];
+
+    function createMessage() {
+      const msg = document.createElement("div");
+      msg.classList.add("message");
+      msg.textContent = messages[Math.floor(Math.random() * messages.length)];
+      msg.style.background = colors[Math.floor(Math.random() * colors.length)];
+      msg.style.left = Math.random() * 80 + "vw";
+      msg.style.top = Math.random() * 80 + "vh";
+      msg.style.animationDelay = `${Math.random()}s`;
+      document.body.appendChild(msg);
+
+      setTimeout(() => {
+        msg.remove();
+      }, 5000);
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    // popup messages
+    setInterval(createMessage, 300);
+
+    // hearts animation
+    setInterval(createHeart, 200);
+  </script>
 </body>
 </html>
